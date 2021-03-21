@@ -10,6 +10,7 @@
             <th scope="col">Name</th>
             <th scope="col">Price</th>
             <th scope="col">Description</th>
+            <th scope="col">Action</th>
         </tr>
         </thead>
         <tbody>
@@ -19,9 +20,14 @@
             <td>{{$product->name}}</td>
             <td>{{number_format($product->price)}} BDT</td>
             <td>{{$product->desc}}</td>
+            <td>
+                <a class="btn btn-primary" href="{{route('admin.product.edit',$product->id)}}">Edit</a>
+                <a class="btn btn-warning" href="{{route('admin.product.delete',$product->id)}}">Delete</a>
+            </td>
         </tr>
         @endforeach
 
         </tbody>
     </table>
+    {{ $products->links('pagination::bootstrap-4') }}
 @endsection
