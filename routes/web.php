@@ -27,5 +27,7 @@ Route::post('products/edit/{id}',[\App\Http\Controllers\Backend\ProductControlle
 
 Route::get('products/delete/{id}',[\App\Http\Controllers\Backend\ProductController::class,'delete'])->name('admin.product.delete');
 
+Route::get('customers',[\App\Http\Controllers\Backend\CustomerController::class,'index'])->name('admin.customer');
+
 
 
