@@ -13,21 +13,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\Backend\DashboardController::class,'index'])->name('dashboard');
+Route::get('admin/login',[\App\Http\Controllers\Backend\LoginController::class,'LoginForm'])->name('admin.login');
 
-Route::get('products',[\App\Http\Controllers\Backend\ProductController::class,'index'])->name('admin.product');
+Route::post('admin/login',[\App\Http\Controllers\Backend\LoginController::class,'login']);
 
-Route::get('products/create',[\App\Http\Controllers\Backend\ProductController::class,'create'])->name('admin.product.create');
+Route::middleware(['auth'])->prefix('admin')->group(function (){
+    Route::get('/', [\App\Http\Controllers\Backend\DashboardController::class,'index'])->name('dashboard');
 
-Route::post('products/create',[\App\Http\Controllers\Backend\ProductController::class,'store']);
+    Route::get('logout',[\App\Http\Controllers\Backend\LoginController::class,'logout'])->name('admin.logout');
 
-Route::get('products/edit/{id}',[\App\Http\Controllers\Backend\ProductController::class,'edit'])->name('admin.product.edit');
+    Route::get('products',[\App\Http\Controllers\Backend\ProductController::class,'index'])->name('admin.product');
 
-Route::post('products/edit/{id}',[\App\Http\Controllers\Backend\ProductController::class,'update']);
+    Route::get('products/create',[\App\Http\Controllers\Backend\ProductController::class,'create'])->name('admin.product.create');
 
-Route::get('products/delete/{id}',[\App\Http\Controllers\Backend\ProductController::class,'delete'])->name('admin.product.delete');
+    Route::post('products/create',[\App\Http\Controllers\Backend\ProductController::class,'store']);
 
-Route::get('customers',[\App\Http\Controllers\Backend\CustomerController::class,'index'])->name('admin.customer');
+    Route::get('products/edit/{id}',[\App\Http\Controllers\Backend\ProductController::class,'edit'])->name('admin.product.edit');
+
+    Route::post('products/edit/{id}',[\App\Http\Controllers\Backend\ProductController::class,'update']);
+
+    Route::get('products/delete/{id}',[\App\Http\Controllers\Backend\ProductController::class,'delete'])->name('admin.product.delete');
+
+    Route::get('customers',[\App\Http\Controllers\Backend\CustomerController::class,'index'])->name('admin.customer');
+
+});
+
 
 
 
