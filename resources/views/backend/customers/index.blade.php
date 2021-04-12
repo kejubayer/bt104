@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('main')
-    <h3 class="text-center">Product list</h3>
+    <h3 class="text-center">Customer list</h3>
     <table class="table">
         <thead>
         <tr>
@@ -22,7 +22,7 @@
             <td>{{$customer->phone}}</td>
             <td>{{$customer->address}}</td>
             <td>
-                <a class="btn btn-primary" href="#">Edit</a>
+                <a class="btn btn-primary" href="{{route('admin.customer.edit',$customer->id)}}">Edit</a>
                 <a class="btn btn-warning" href="#">Delete</a>
             </td>
         </tr>

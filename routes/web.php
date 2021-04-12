@@ -36,6 +36,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function (){
 
     Route::get('customers',[\App\Http\Controllers\Backend\CustomerController::class,'index'])->name('admin.customer');
 
+    Route::get('customer/{id}/edit',[\App\Http\Controllers\Backend\CustomerController::class,'edit'])->name('admin.customer.edit');
+
+    Route::post('customer/{id}/edit',[\App\Http\Controllers\Backend\CustomerController::class,'update']);
+
 });
 
 
