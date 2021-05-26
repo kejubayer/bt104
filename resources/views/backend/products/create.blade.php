@@ -5,7 +5,16 @@
         <div class="col-md-2"></div>
         <div class="col-md-8">
             <h3 class="text-center mt-3">Create New Product</h3>
-            <form action="{{route('admin.product.create')}}" method="post">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <form action="{{route('admin.product.create')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="name" class="form-label">Product Name</label>
@@ -18,6 +27,10 @@
                 <div class="mb-3">
                     <label for="desc" class="form-label">Description</label>
                     <textarea name="desc" class="form-control" id="desc" cols="30" rows="5"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="photo" class="form-label">Photo</label>
+                    <input type="file" name="photo" class="form-control" id="photo">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

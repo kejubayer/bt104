@@ -22,7 +22,7 @@
             <td>{{number_format($product->price)}} BDT</td>
             <td>{{$product->desc}}</td>
             <td>
-                <img src="{{$product->photo}}" alt="Photo" width="100px">
+                <img src="{{asset('upload/products/'.$product->photo)}}" alt="Photo" width="100px">
             </td>
             <td>
                 <a class="btn btn-primary" href="{{route('admin.product.edit',$product->id)}}">Edit</a>
