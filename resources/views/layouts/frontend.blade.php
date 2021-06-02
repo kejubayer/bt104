@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.83.1">
-    <title>{{config('app.name')}}</title>
+    <title>@yield('title'){{config('app.name')}}</title>
 
 
 

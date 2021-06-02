@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/',[\App\Http\Controllers\Frontend\HomeController::class,'index'])->name('home');
 
+Route::get('/product/{id}/{slug}',[\App\Http\Controllers\Frontend\HomeController::class,'productShow'])->name('product.show');
+
 Route::get('admin/login',[\App\Http\Controllers\Backend\LoginController::class,'LoginForm'])->name('admin.login');
 
 Route::post('admin/login',[\App\Http\Controllers\Backend\LoginController::class,'login']);
