@@ -16,6 +16,10 @@ Route::get('/',[\App\Http\Controllers\Frontend\HomeController::class,'index'])->
 
 Route::get('/product/{id}/{slug}',[\App\Http\Controllers\Frontend\HomeController::class,'productShow'])->name('product.show');
 
+Route::get('/add-to-cart/{id}',[\App\Http\Controllers\Frontend\CartController::class,'cart'])->name('add.to.cart');
+
+Route::get('/cart',[\App\Http\Controllers\Frontend\CartController::class,'showCart'])->name('cart');
+
 Route::get('admin/login',[\App\Http\Controllers\Backend\LoginController::class,'LoginForm'])->name('admin.login');
 
 Route::post('admin/login',[\App\Http\Controllers\Backend\LoginController::class,'login']);

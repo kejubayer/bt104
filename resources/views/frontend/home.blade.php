@@ -11,7 +11,7 @@
                     entirely.</p>
                 <p>
                     <a href="#" class="btn btn-primary my-2">Main call to action</a>
-                    <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+                    <a href="{{route('cart')}}" class="btn btn-secondary my-2">Show Cart</a>
                 </p>
             </div>
         </div>
@@ -31,8 +31,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <a class="btn btn-sm btn-outline-secondary" href="{{route('product.show',[$product->id,\Illuminate\Support\Str::slug($product->name)])}}">View</a>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Add To Cart
-                                        </button>
+                                        <a class="btn btn-sm btn-outline-secondary" href="{{route('add.to.cart',$product->id)}}">Add To Cart</a>
                                     </div>
                                     <small class="text-muted">{{number_format($product->price)}} BDT</small>
                                 </div>
