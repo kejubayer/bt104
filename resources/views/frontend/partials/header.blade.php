@@ -9,8 +9,14 @@
                 <div class="col-sm-4 offset-md-1 py-4">
                     <h4 class="text-white">Contact</h4>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white">Login</a></li>
-                        <li><a href="#" class="text-white">Registration</a></li>
+                        @if(auth()->user())
+                            <li><a href="{{route('profile')}}" class="text-white">Profile</a></li>
+                            <li><a href="{{route('logout')}}" class="text-white">Logout</a></li>
+                        @else
+                            <li><a href="{{route('login')}}" class="text-white">Login</a></li>
+                            <li><a href="{{route('registration')}}" class="text-white">Registration</a></li>
+                            @endif
+
                     </ul>
                 </div>
             </div>

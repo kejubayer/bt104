@@ -16,6 +16,17 @@ Route::get('/',[\App\Http\Controllers\Frontend\HomeController::class,'index'])->
 
 Route::get('/product/{id}/{slug}',[\App\Http\Controllers\Frontend\HomeController::class,'productShow'])->name('product.show');
 
+Route::get('registration',[\App\Http\Controllers\Frontend\UserController::class,'registration'])->name('registration');
+Route::post('registration',[\App\Http\Controllers\Frontend\UserController::class,'doRegistration']);
+
+Route::get('login',[\App\Http\Controllers\Frontend\UserController::class,'login'])->name('login');
+Route::post('login',[\App\Http\Controllers\Frontend\UserController::class,'doLogin']);
+
+Route::get('logout',[\App\Http\Controllers\Frontend\UserController::class,'logout'])->name('logout');
+
+Route::get('profile',[\App\Http\Controllers\Frontend\UserController::class,'profile'])->name('profile');
+Route::post('profile',[\App\Http\Controllers\Frontend\UserController::class,'updateProfile']);
+
 Route::get('/add-to-cart/{id}',[\App\Http\Controllers\Frontend\CartController::class,'cart'])->name('add.to.cart');
 
 Route::get('/cart',[\App\Http\Controllers\Frontend\CartController::class,'showCart'])->name('cart');
