@@ -31,11 +31,15 @@ Route::get('/add-to-cart/{id}',[\App\Http\Controllers\Frontend\CartController::c
 
 Route::get('/cart',[\App\Http\Controllers\Frontend\CartController::class,'showCart'])->name('cart');
 
+Route::post('order',[\App\Http\Controllers\Frontend\OrderController::class,'doOrder'])->name('do.order');
+
 Route::get('admin/login',[\App\Http\Controllers\Backend\LoginController::class,'LoginForm'])->name('admin.login');
 
 Route::post('admin/login',[\App\Http\Controllers\Backend\LoginController::class,'login']);
 
 Route::middleware(['auth'])->prefix('admin')->group(function (){
+
+
     Route::get('/', [\App\Http\Controllers\Backend\DashboardController::class,'index'])->name('dashboard');
 
     Route::get('logout',[\App\Http\Controllers\Backend\LoginController::class,'logout'])->name('admin.logout');

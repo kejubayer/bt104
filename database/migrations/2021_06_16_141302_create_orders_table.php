@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('qty');
             $table->string('payment_method');
             $table->string('txn_id')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }

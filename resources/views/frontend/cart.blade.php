@@ -44,5 +44,31 @@
             </tr>
             </tbody>
         </table>
+        @if($total_qty>0)
+            <form action="{{route('do.order')}}" method="post">
+                @csrf
+                <div class="row ">
+                    <div class="col-md-4">
+                        <label for="method" class="form-label">Payment Method</label>
+                        <select name="method" id="method" class="form-control">
+                            <option value="bkash">BKash</option>
+                            <option value="rocket">Rocket</option>
+                            <option value="nogod">Nogod</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="txn_id" class="form-label">Txn ID</label>
+                        <input type="text" class="form-control" name="txn_id" id="txn_id" required>
+                    </div>
+                    <input type="hidden" name="price" value="{{$total_price}}">
+                    <input type="hidden" name="qty" value="{{$total_qty}}">
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary mt-3">Place Order</button>
+                    </div>
+                </div>
+            </form>
+        @else
+            <h2 class="text-center text-warning">Please add product to cart!</h2>
+        @endif
     </div>
 @endsection

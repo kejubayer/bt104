@@ -3,7 +3,6 @@
 @section('main')
     <div class="container">
         <div class="row">
-            <div class="col-md-3"></div>
             <div class="col-md-6">
                 <h2 class="text-center mt-3">Profile</h2>
                 @if ($errors->any())
@@ -42,6 +41,33 @@
                     <button type="submit" class="btn btn-primary">Register</button>
                 </form>
             </div>
+            <div class="col-md-6">
+                <h2 class="text-center">Your Orders</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Order NO</th>
+                        <th scope="col">Total price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($orders as $key=>$item)
+                        <tr>
+                            <th scope="row">{{$key+1}}</th>
+                            <td>{{$item->order_no}}</td>
+                            <td>{{$item->price}} <span style="font-size: 20px; font-weight: bold">৳</span></td>
+                            <td>{{$item->qty}}</td>
+                            <td>{{$item->created_at->format('Y-m-d')}}
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 

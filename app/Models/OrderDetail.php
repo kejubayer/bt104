@@ -9,6 +9,8 @@ class OrderDetail extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function order()
     {
         return $this->belongsTo(Order::class);
@@ -16,6 +18,6 @@ class OrderDetail extends Model
 
     public function product()
     {
-            return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }
