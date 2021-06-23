@@ -12,55 +12,67 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',[\App\Http\Controllers\Frontend\HomeController::class,'index'])->name('home');
+Route::get('/', [\App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
 
-Route::get('/product/{id}/{slug}',[\App\Http\Controllers\Frontend\HomeController::class,'productShow'])->name('product.show');
+Route::get('/product/{id}/{slug}', [\App\Http\Controllers\Frontend\HomeController::class, 'productShow'])->name('product.show');
 
-Route::get('registration',[\App\Http\Controllers\Frontend\UserController::class,'registration'])->name('registration');
-Route::post('registration',[\App\Http\Controllers\Frontend\UserController::class,'doRegistration']);
+Route::get('registration', [\App\Http\Controllers\Frontend\UserController::class, 'registration'])->name('registration');
+Route::post('registration', [\App\Http\Controllers\Frontend\UserController::class, 'doRegistration']);
 
-Route::get('login',[\App\Http\Controllers\Frontend\UserController::class,'login'])->name('login');
-Route::post('login',[\App\Http\Controllers\Frontend\UserController::class,'doLogin']);
+Route::get('login', [\App\Http\Controllers\Frontend\UserController::class, 'login'])->name('login');
+Route::post('login', [\App\Http\Controllers\Frontend\UserController::class, 'doLogin']);
 
-Route::get('logout',[\App\Http\Controllers\Frontend\UserController::class,'logout'])->name('logout');
+Route::get('logout', [\App\Http\Controllers\Frontend\UserController::class, 'logout'])->name('logout');
 
-Route::get('profile',[\App\Http\Controllers\Frontend\UserController::class,'profile'])->name('profile');
-Route::post('profile',[\App\Http\Controllers\Frontend\UserController::class,'updateProfile']);
+Route::get('/add-to-cart/{id}', [\App\Http\Controllers\Frontend\CartController::class, 'cart'])->name('add.to.cart');
 
-Route::get('/add-to-cart/{id}',[\App\Http\Controllers\Frontend\CartController::class,'cart'])->name('add.to.cart');
+Route::get('/cart', [\App\Http\Controllers\Frontend\CartController::class, 'showCart'])->name('cart');
 
-Route::get('/cart',[\App\Http\Controllers\Frontend\CartController::class,'showCart'])->name('cart');
+Route::post('order', [\App\Http\Controllers\Frontend\OrderController::class, 'doOrder'])->name('do.order');
 
-Route::post('order',[\App\Http\Controllers\Frontend\OrderController::class,'doOrder'])->name('do.order');
+Route::get('admin/login', [\App\Http\Controllers\Backend\LoginController::class, 'LoginForm'])->name('admin.login');
 
-Route::get('admin/login',[\App\Http\Controllers\Backend\LoginController::class,'LoginForm'])->name('admin.login');
+Route::post('admin/login', [\App\Http\Controllers\Backend\LoginController::class, 'login']);
 
-Route::post('admin/login',[\App\Http\Controllers\Backend\LoginController::class,'login']);
+Route::middleware(['auth'])->group(function () {
 
-Route::middleware(['auth'])->prefix('admin')->group(function (){
+    Route::get('profile', [\App\Http\Controllers\Frontend\UserController::class, 'profile'])->name('profile');
+    Route::post('profile', [\App\Http\Controllers\Frontend\UserController::class, 'updateProfile']);
 
 
-    Route::get('/', [\App\Http\Controllers\Backend\DashboardController::class,'index'])->name('dashboard');
+    Route::middleware(['is_admin'])->prefix('admin')->group(function () {
 
-    Route::get('logout',[\App\Http\Controllers\Backend\LoginController::class,'logout'])->name('admin.logout');
+        Route::get('/', [\App\Http\Controllers\Backend\DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('products',[\App\Http\Controllers\Backend\ProductController::class,'index'])->name('admin.product');
+        Route::get('logout', [\App\Http\Controllers\Backend\LoginController::class, 'logout'])->name('admin.logout');
 
-    Route::get('products/create',[\App\Http\Controllers\Backend\ProductController::class,'create'])->name('admin.product.create');
+        Route::get('products', [\App\Http\Controllers\Backend\ProductController::class, 'index'])->name('admin.product');
 
-    Route::post('products/create',[\App\Http\Controllers\Backend\ProductController::class,'store']);
+        Route::get('products/create', [\App\Http\Controllers\Backend\ProductController::class, 'create'])->name('admin.product.create');
 
-    Route::get('products/edit/{id}',[\App\Http\Controllers\Backend\ProductController::class,'edit'])->name('admin.product.edit');
+        Route::post('products/create', [\App\Http\Controllers\Backend\ProductController::class, 'store']);
 
-    Route::post('products/edit/{id}',[\App\Http\Controllers\Backend\ProductController::class,'update']);
+        Route::get('products/edit/{id}', [\App\Http\Controllers\Backend\ProductController::class, 'edit'])->name('admin.product.edit');
 
-    Route::get('products/delete/{id}',[\App\Http\Controllers\Backend\ProductController::class,'delete'])->name('admin.product.delete');
+        Route::post('products/edit/{id}', [\App\Http\Controllers\Backend\ProductController::class, 'update']);
 
-    Route::get('customers',[\App\Http\Controllers\Backend\CustomerController::class,'index'])->name('admin.customer');
+        Route::get('products/delete/{id}', [\App\Http\Controllers\Backend\ProductController::class, 'delete'])->name('admin.product.delete');
 
-    Route::get('customer/{id}/edit',[\App\Http\Controllers\Backend\CustomerController::class,'edit'])->name('admin.customer.edit');
+        Route::get('customers', [\App\Http\Controllers\Backend\CustomerController::class, 'index'])->name('admin.customer');
 
-    Route::post('customer/{id}/edit',[\App\Http\Controllers\Backend\CustomerController::class,'update']);
+        Route::get('customer/{id}/edit', [\App\Http\Controllers\Backend\CustomerController::class, 'edit'])->name('admin.customer.edit');
+
+        Route::post('customer/{id}/edit', [\App\Http\Controllers\Backend\CustomerController::class, 'update']);
+
+        Route::get('order',[\App\Http\Controllers\Backend\OrderController::class,'index'])->name('admin.order');
+
+        Route::get('order/edit/{id}',[\App\Http\Controllers\Backend\OrderController::class,'edit'])->name('admin.order.edit');
+        Route::post('order/edit/{id}',[\App\Http\Controllers\Backend\OrderController::class,'update']);
+
+        Route::get('order/delete/{id}',[\App\Http\Controllers\Backend\OrderController::class,'delete'])->name('admin.order.delete');
+
+
+    });
 
 });
 

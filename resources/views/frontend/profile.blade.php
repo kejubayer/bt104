@@ -50,6 +50,7 @@
                         <th scope="col">Order NO</th>
                         <th scope="col">Total price</th>
                         <th scope="col">Quantity</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Date</th>
                     </tr>
                     </thead>
@@ -60,6 +61,7 @@
                             <td>{{$item->order_no}}</td>
                             <td>{{$item->price}} <span style="font-size: 20px; font-weight: bold">৳</span></td>
                             <td>{{$item->qty}}</td>
+                            <td>{{$item->status}}</td>
                             <td>{{$item->created_at->format('Y-m-d')}}
                             </td>
                         </tr>
