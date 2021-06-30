@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class OrderController extends Controller
@@ -36,6 +38,7 @@ class OrderController extends Controller
                     'qty'=>$cart['quantity'],
                 ]);
             }
+            Mail::to(auth()->user()->email)->send(new OrderMail($order));
             DB::commit();
             session()->forget('cart');
             return redirect()->route('profile');

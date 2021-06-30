@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [\App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
+Route::get('/mail', [\App\Http\Controllers\Frontend\HomeController::class, 'mail']);
 
 Route::get('/product/{id}/{slug}', [\App\Http\Controllers\Frontend\HomeController::class, 'productShow'])->name('product.show');
 
